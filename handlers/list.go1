@@ -1,0 +1,37 @@
+package handlers
+
+import (
+	"goconsole/repo"
+	"fmt"
+	"log"
+	"strings"
+
+	"github.com/spf13/cobra"
+)
+
+//ListHandle ...
+func ListHandle() func(cmd *cobra.Command, args []string) {
+
+	return func(cmd *cobra.Command, args []string) {
+		
+		limit, err := cmd.PersistentFlags().GetString("limit")
+		if err != nil {
+			log.Println(err)
+			return
+		}
+
+		offset, err := cmd.PersistentFlags().GetString("offset")
+		if err != nil {
+			log.Println(err)
+			return
+		}
+
+		ddlRepo := repo.Ddl{}
+		if result, err := ddlRepo.GetAllTablesIn(namespace); err != nil {
+			log.Println("Error when retreiving tables in namespace",namespace)
+		} else {
+			fmt.Println("---------List of Tables---------", strings.Join(result,"\n"))
+		}
+
+	}
+}

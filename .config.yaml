@@ -1,0 +1,3 @@
+ConnectionString: user=bitsmonkey password=password host=db.com port=7530 dbname=dbname connect_timeout=20 sslmode=verify-full
+PGSSLROOTCERT: cert.pem
+DefaultNameSpace: namespace
